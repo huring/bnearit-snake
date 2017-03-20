@@ -1,3 +1,5 @@
+# Snake clone for BnearIT
+
 JavaScript Snake<br/>
 By Patrick Gillespie<br/>
 License: MIT<br/>

@@ -58,7 +58,7 @@ a.snake-link:hover {
     font-size: 14px;
     color: #ffffff;
     text-align: center;
-    background-color: #FC5454;
+    background-color: #2E373F;
     padding: 8px;
     margin: 0px;
 }
@@ -91,8 +91,8 @@ a.snake-link:hover {
     margin: 0px;
     padding: 0px;
     position: absolute;
-    background-color: #0000A8;
-    border: 0px solid #0000A8;
+    background-color: #8EBD40;
+    border: 0px solid #8EBD40;
 }
 
 .snake-game-container {
@@ -101,7 +101,7 @@ a.snake-link:hover {
     border-width: 0px;
     border-style: none;
     zoom: 1;
-    background-color: #FC5454;
+    background-color: #2E373F;
     position: relative;
 }
             
