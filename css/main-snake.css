@@ -11,6 +11,7 @@ body {
 #game-area {
 	margin:0px;
 	padding:0px;
+    background: #7DA51A;
 }
 
 #high-score {
@@ -58,7 +59,7 @@ a.snake-link:hover {
     font-size: 14px;
     color: #ffffff;
     text-align: center;
-    background-color: #2E373F;
+    background-color: #7DA51A;
     padding: 8px;
     margin: 0px;
 }
@@ -76,7 +77,10 @@ a.snake-link:hover {
    background-image: url('./images/snakeblock.png');
 }
 .snake-snakebody-dead {
-   background-image: url('./images/deadblock.png');
+   
+   background-color: #FF0000;
+   z-index: 10000;
+   background-image: none;
 }
 
 .snake-food-block {
@@ -89,8 +93,8 @@ a.snake-link:hover {
     background-repeat: no-repeat;
 }
 
-.snake-food-block.food-special { background-color: #DD00EB; }
-.snake-food-block.food-legendary { background-color: #FF0000; }
+.snake-food-block.food-special { background-image: url('./images/enemyblock-special.png'); }
+.snake-food-block.food-legendary { background-image: url('./images/enemyblock-legendary.png'); }
 
 .snake-playing-field {
     margin: 0px;
@@ -98,6 +102,9 @@ a.snake-link:hover {
     position: absolute;
     background-color: #95C321;
     border: 0px solid #95C321;
+    background-image: url('./images/bnearit-bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .snake-game-container {
@@ -111,12 +118,13 @@ a.snake-link:hover {
 }
             
 .snake-welcome-dialog {
-    padding: 8px;
+    padding: 20px;
     margin: 0px;
-    background-color: #000000;
-    color: #ffffff;
-    font-family: Verdana, arial, helvetica, sans-serif;
+    background-color: #FFF;
+    color: #194976;
+    font-family: 'Press Start 2P', cursive;
     font-size: 14px;
+    line-height: 20px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -126,22 +134,45 @@ a.snake-link:hover {
     margin-left: -158px;
     text-align: center;
     display: block;
+    border-radius: 5px;
+}
+
+.logo {
+    background-image: url('./images/bnearit-logo-tagline.png');
+    width: 100%;
+    height: 150px;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.score {
+    font-size: 30px;
+    background: transparent;
+    color: #2E373F;
+    display: block;
+    border-bottom: 5px solid #7DA51A;
+    width: 90%;
+    margin: 0 70px;
+    text-align: right;
+    font-family: 'Press Start 2P', cursive;
 }
 
 .snake-try-again-dialog {
-    padding: 8px;
+    padding: 20px;
     margin: 0px;
-    background-color: #000000;
-    color: #ffffff;
-    font-family: Verdana, arial, helvetica, sans-serif;
-    font-size: 14px;
+    background-color: #FFF;
+    color: #194976;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 18px;
     position: absolute;
     top: 50%;
     left: 50%;
     width: 300px;
-    height: 100px;
     margin-top: -75px;
     margin-left: -158px;
     text-align: center;
     display: none;
-    }
+    border-radius: 5px;
+}

@@ -124,12 +124,7 @@ SNAKE.Snake = SNAKE.Snake || (function() {
             snakeSpeed = 75,
             isDead = false,
             isPaused = false;
-        function getMode (mode, speed) {
-    document.getElementById(mode).addEventListener('click', function () { snakeSpeed = speed; });
-}
-            getMode('Easy', 100);
-            getMode('Medium', 75);
-            getMode('Difficult', 50);
+
         // ----- public variables -----
         me.snakeBody = {};
         me.snakeBody["b0"] = new SnakeBlock(); // create snake head
@@ -287,6 +282,10 @@ SNAKE.Snake = SNAKE.Snake || (function() {
             } else if (grid[newHead.row][newHead.col] > 0) {
                 me.handleDeath();
             } else if (grid[newHead.row][newHead.col] === playingBoard.getGridFoodValue()) {
+                
+
+                console.log(playingBoard.getGridFoodValue());
+
                 grid[newHead.row][newHead.col] = 1;
                 me.eatFood();
                 setTimeout(function(){me.go();}, snakeSpeed);
@@ -471,7 +470,7 @@ SNAKE.Food = SNAKE.Food || (function() {
             var seed = Math.floor(Math.random() * 100) + 1;
             var type = "";
 
-            if (seed > 50) {
+            if (seed > 70) {
                 type = "food-special";
             }
 
@@ -513,15 +512,22 @@ SNAKE.Food = SNAKE.Food || (function() {
                 } 
             }
 
+            var enemyType = me.getFoodType();
+            elmFood.className = "snake-food-block " + enemyType;
+
+            playingBoard.setGridFoodValue(-1);
+
+            if (enemyType == "food-special")
+                playingBoard.setGridFoodValue(-2);
+
+            if (enemyType == "food-legendary")
+                playingBoard.setGridFoodValue(-3);
+
             playingBoard.grid[row][col] = playingBoard.getGridFoodValue();
             fRow = row;
             fColumn = col;
             elmFood.style.top = row * playingBoard.getBlockHeight() + "px";
             elmFood.style.left = col * playingBoard.getBlockWidth() + "px";
-
-            var enemyType = me.getFoodType();
-
-            elmFood.className = "snake-food-block " + enemyType;
 
             console.log(elmFood.className);
 
@@ -637,11 +643,11 @@ SNAKE.Board = SNAKE.Board || (function() {
             
             elmAboutPanel = document.createElement("div");
             elmAboutPanel.className = "snake-panel-component";
-            elmAboutPanel.innerHTML = "<a href='http://patorjk.com/blog/software/' class='snake-link'>more patorjk.com apps</a> - <a href='https://github.com/patorjk/JavaScript-Snake' class='snake-link'>source code</a>";
+            // elmAboutPanel.innerHTML = "<a href='http://patorjk.com/blog/software/' class='snake-link'>more patorjk.com apps</a> - <a href='https://github.com/patorjk/JavaScript-Snake' class='snake-link'>source code</a>";
             
             elmLengthPanel = document.createElement("div");
             elmLengthPanel.className = "snake-panel-component";
-            elmLengthPanel.innerHTML = "Length: 1";
+            elmLengthPanel.innerHTML = "0";
             
             elmWelcome = createWelcomeElement();
             elmTryAgain = createTryAgainElement();
@@ -686,9 +692,9 @@ SNAKE.Board = SNAKE.Board || (function() {
             if (config.fullScreen) {
                 fullScreenText = "On Windows, press F11 to play in Full Screen mode.";   
             }
-            welcomeTxt.innerHTML = "JavaScript Snake<p></p>Use the <strong>arrow keys</strong> on your keyboard to play the game. " + fullScreenText + "<p></p>";
+            welcomeTxt.innerHTML = "<p></p>Anv&auml;nd <strong>nummertangenterna</strong> p&aring; tangentbordet f&ouml;r att spela.<p></p><span class='logo'></span>";
             var welcomeStart = document.createElement("button");
-            welcomeStart.appendChild(document.createTextNode("Play Game"));
+            welcomeStart.appendChild(document.createTextNode("Spela (enter)"));
             var loadGame = function() {
                 SNAKE.removeEventListener(window, "keyup", kbShortcut, false);
                 tmpElm.style.display = "none";
@@ -717,9 +723,9 @@ SNAKE.Board = SNAKE.Board || (function() {
             tmpElm.className = "snake-try-again-dialog";
             
             var tryAgainTxt = document.createElement("div");
-            tryAgainTxt.innerHTML = "JavaScript Snake<p></p>You died :(.<p></p>";
+            tryAgainTxt.innerHTML = "<span class='logo'></span><p></p>Spela mer<p></p>";
             var tryAgainStart = document.createElement("button");
-            tryAgainStart.appendChild( document.createTextNode("Play Again?"));
+            tryAgainStart.appendChild( document.createTextNode("Spela igen (enter)"));
             
             var reloadGame = function() {
                 tmpElm.style.display = "none";
@@ -767,7 +773,7 @@ SNAKE.Board = SNAKE.Board || (function() {
         me.resetBoard = function() {
             SNAKE.removeEventListener(elmContainer, "keydown", myKeyListener, false);
             mySnake.reset();
-            elmLengthPanel.innerHTML = "Length: 1";
+            elmLengthPanel.innerHTML = "0";
             me.setupPlayingField();
         };
         /**
@@ -793,6 +799,10 @@ SNAKE.Board = SNAKE.Board || (function() {
         me.getGridFoodValue = function() {
             return GRID_FOOD_VALUE;
         };
+
+        me.setGridFoodValue = function(n) {
+            GRID_FOOD_VALUE = n;
+        }
         /**
         * @method getPlayingFieldElement
         * @return {DOM Element} The div representing the playing field (this is where the snake can move).
@@ -848,9 +858,9 @@ SNAKE.Board = SNAKE.Board || (function() {
             if (config.fullScreen === true) {
                 cTop = 0;
                 cLeft = 0;
-                cWidth = getClientWidth()-5;
-                cHeight = getClientHeight()-5;
-                document.body.style.backgroundColor = "#FC5454";
+                cWidth = getClientWidth();
+                cHeight = getClientHeight();
+    
             } else {
                 cTop = config.top;
                 cLeft = config.left;
@@ -882,8 +892,9 @@ SNAKE.Board = SNAKE.Board || (function() {
             elmAboutPanel.style.width = "450px";
             elmAboutPanel.style.left = Math.round(cWidth/2) - Math.round(450/2) + "px";
             
-            elmLengthPanel.style.top = pLabelTop;
-            elmLengthPanel.style.left = cWidth - 120 + "px";
+            elmLengthPanel.style.top = "30px";
+            // elmLengthPanel.style.left = cWidth - 200 + "px";
+            elmLengthPanel.className += " score"
             
             // if width is too narrow, hide the about panel
             if (cWidth < 700) {
@@ -910,12 +921,7 @@ SNAKE.Board = SNAKE.Board || (function() {
             myFood.randomlyPlaceFood();
             
             // setup event listeners
-            function getMode (mode, speed) {
-    document.getElementById(mode).addEventListener('click', function () { snakeSpeed = speed; });
-}
-            getMode('Easy', 100);
-            getMode('Medium', 75);
-            getMode('Difficult', 50);
+
             myKeyListener = function(evt) {
                 if (!evt) var evt = window.event;
                 var keyNum = (evt.which) ? evt.which : evt.keyCode;
@@ -966,7 +972,7 @@ SNAKE.Board = SNAKE.Board || (function() {
         * @method foodEaten
         */ 
         me.foodEaten = function() {
-            elmLengthPanel.innerHTML = "Length: " + mySnake.snakeLength;
+            elmLengthPanel.innerHTML = "" + mySnake.snakeLength;
             myFood.randomlyPlaceFood();
         };
         
