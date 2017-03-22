@@ -466,6 +466,23 @@ SNAKE.Food = SNAKE.Food || (function() {
         me.getFoodElement = function() {
             return elmFood;  
         };
+
+        me.getFoodType = function() {
+            var seed = Math.floor(Math.random() * 100) + 1;
+            var type = "";
+
+            if (seed > 50) {
+                type = "food-special";
+            }
+
+            if (seed > 90) {
+                type = "food-legendary";
+            }
+
+            return type;
+
+
+        };
         
         /**
         * Randomly places the food onto an available location on the playing board.
@@ -502,7 +519,9 @@ SNAKE.Food = SNAKE.Food || (function() {
             elmFood.style.top = row * playingBoard.getBlockHeight() + "px";
             elmFood.style.left = col * playingBoard.getBlockWidth() + "px";
 
-            elmFood.className = "snake-food-block food-foo";
+            var enemyType = me.getFoodType();
+
+            elmFood.className = "snake-food-block " + enemyType;
 
             console.log(elmFood.className);
 

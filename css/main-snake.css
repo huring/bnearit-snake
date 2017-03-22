@@ -85,13 +85,12 @@ a.snake-link:hover {
     background-color: transparent;
     border: 0px solid transparent;
     position: absolute;
-    background-image: url('./images/enemyblock.png');
+    background-image: url('./images/enemyblock-standard.png');
     background-repeat: no-repeat;
 }
 
-.snake-food-block.food-foo {
-    background-color: #1100EB;
-}
+.snake-food-block.food-special { background-color: #DD00EB; }
+.snake-food-block.food-legendary { background-color: #FF0000; }
 
 .snake-playing-field {
     margin: 0px;
