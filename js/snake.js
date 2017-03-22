@@ -501,6 +501,11 @@ SNAKE.Food = SNAKE.Food || (function() {
             fColumn = col;
             elmFood.style.top = row * playingBoard.getBlockHeight() + "px";
             elmFood.style.left = col * playingBoard.getBlockWidth() + "px";
+
+            elmFood.className = "snake-food-block food-foo";
+
+            console.log(elmFood.className);
+
         };
     };
 })();

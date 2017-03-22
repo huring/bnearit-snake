@@ -66,7 +66,7 @@ a.snake-link:hover {
 .snake-snakebody-block {
     margin: 0px;
     padding: 0px;
-    background-color: #FF0000;
+    background-color: transparent;
     position: absolute;
     border: 0px solid #000080;
     background-repeat: no-repeat;
@@ -82,17 +82,23 @@ a.snake-link:hover {
 .snake-food-block {
     margin: 0px;
     padding: 0px;
-    background-color: #FF0000;
-    border: 0px solid #000080;
+    background-color: transparent;
+    border: 0px solid transparent;
     position: absolute;
+    background-image: url('./images/enemyblock.png');
+    background-repeat: no-repeat;
+}
+
+.snake-food-block.food-foo {
+    background-color: #1100EB;
 }
 
 .snake-playing-field {
     margin: 0px;
     padding: 0px;
     position: absolute;
-    background-color: #8EBD40;
-    border: 0px solid #8EBD40;
+    background-color: #95C321;
+    border: 0px solid #95C321;
 }
 
 .snake-game-container {
