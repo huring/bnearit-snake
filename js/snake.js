@@ -287,6 +287,9 @@ SNAKE.Snake = SNAKE.Snake || (function() {
                 me.handleDeath();
             } else if (grid[newHead.row][newHead.col] === playingBoard.getGridFoodValue()) {
                 
+
+                console.log(playingBoard.getGridFoodValue());
+
                 grid[newHead.row][newHead.col] = 1;
                 me.eatFood();
                 setTimeout(function(){me.go();}, snakeSpeed);
@@ -529,6 +532,8 @@ SNAKE.Food = SNAKE.Food || (function() {
             fColumn = col;
             elmFood.style.top = row * playingBoard.getBlockHeight() + "px";
             elmFood.style.left = col * playingBoard.getBlockWidth() + "px";
+
+            console.log(elmFood.className);
 
         };
     };
