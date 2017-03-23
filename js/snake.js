@@ -287,9 +287,6 @@ SNAKE.Snake = SNAKE.Snake || (function() {
                 me.handleDeath();
             } else if (grid[newHead.row][newHead.col] === playingBoard.getGridFoodValue()) {
                 
-
-                console.log(playingBoard.getGridFoodValue());
-
                 grid[newHead.row][newHead.col] = 1;
                 me.eatFood();
                 setTimeout(function(){me.go();}, snakeSpeed);
@@ -532,8 +529,6 @@ SNAKE.Food = SNAKE.Food || (function() {
             fColumn = col;
             elmFood.style.top = row * playingBoard.getBlockHeight() + "px";
             elmFood.style.left = col * playingBoard.getBlockWidth() + "px";
-
-            console.log(elmFood.className);
 
         };
     };
@@ -930,8 +925,6 @@ SNAKE.Board = SNAKE.Board || (function() {
                 if (!evt) var evt = window.event;
                 var keyNum = (evt.which) ? evt.which : evt.keyCode;
 
-                console.log(keyNum)
-
                 if (me.getBoardState() === 1) {
                     if ( !(keyNum >= 37 && keyNum <= 40) && !(keyNum === 87 || keyNum === 65 || keyNum === 83 || keyNum === 68 || keyNum === 104 || keyNum === 102 || keyNum === 101 || keyNum === 100)) {return;} // if not an arrow key, leave
                     
@@ -942,7 +935,7 @@ SNAKE.Board = SNAKE.Board || (function() {
                         if (!evt) var evt = window.event;
                         var keyNum = (evt.which) ? evt.which : evt.keyCode;
                         
-                        //console.log(keyNum);
+                        console.log(keyNum);
                         if (keyNum === 32) {
 							if(me.getBoardState()!=0)
                                 me.setPaused(!me.getPaused());
@@ -1019,10 +1012,3 @@ SNAKE.Board = SNAKE.Board || (function() {
         
     }; // end return function
 })();
-function getHighScore () {
-    document.getElementById('high-score').addEventListener('click', function () {
-        if (localStorage.jsSnakeHighScore == undefined) alert('You have not played this game yet!');
-        else
-    alert('Your current high score is ' + localStorage.jsSnakeHighScore + '.'); });
-}
-getHighScore();
