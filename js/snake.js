@@ -925,6 +925,8 @@ SNAKE.Board = SNAKE.Board || (function() {
                 if (!evt) var evt = window.event;
                 var keyNum = (evt.which) ? evt.which : evt.keyCode;
 
+                console.log(keyNum)
+
                 if (me.getBoardState() === 1) {
                     if ( !(keyNum >= 37 && keyNum <= 40) && !(keyNum === 87 || keyNum === 65 || keyNum === 83 || keyNum === 68 || keyNum === 104 || keyNum === 102 || keyNum === 101 || keyNum === 100)) {return;} // if not an arrow key, leave
                     
