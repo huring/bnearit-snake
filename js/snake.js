@@ -209,24 +209,28 @@ SNAKE.Snake = SNAKE.Snake || (function() {
             switch (keyNum) {
                 case 37:
                 case 65:
+                case 100:
                     if ( lastMove !== 1 || snakeLength === 1 ) {
                         moveQueue.unshift(3); //SnakeDirection = 3;
                     }
                     break;    
                 case 38:
                 case 87:
+                case 104:
                     if ( lastMove !== 2 || snakeLength === 1 ) {
                         moveQueue.unshift(0);//SnakeDirection = 0;
                     }
                     break;    
                 case 39:
                 case 68:
+                case 102:
                     if ( lastMove !== 3 || snakeLength === 1 ) {
                         moveQueue.unshift(1); //SnakeDirection = 1;
                     }
                     break;    
                 case 40:
                 case 83:
+                case 101:
                     if ( lastMove !== 0 || snakeLength === 1 ) {
                         moveQueue.unshift(2);//SnakeDirection = 2;
                     }
@@ -283,9 +287,6 @@ SNAKE.Snake = SNAKE.Snake || (function() {
                 me.handleDeath();
             } else if (grid[newHead.row][newHead.col] === playingBoard.getGridFoodValue()) {
                 
-
-                console.log(playingBoard.getGridFoodValue());
-
                 grid[newHead.row][newHead.col] = 1;
                 me.eatFood();
                 setTimeout(function(){me.go();}, snakeSpeed);
@@ -528,8 +529,6 @@ SNAKE.Food = SNAKE.Food || (function() {
             fColumn = col;
             elmFood.style.top = row * playingBoard.getBlockHeight() + "px";
             elmFood.style.left = col * playingBoard.getBlockWidth() + "px";
-
-            console.log(elmFood.className);
 
         };
     };
@@ -927,7 +926,7 @@ SNAKE.Board = SNAKE.Board || (function() {
                 var keyNum = (evt.which) ? evt.which : evt.keyCode;
 
                 if (me.getBoardState() === 1) {
-                    if ( !(keyNum >= 37 && keyNum <= 40) && !(keyNum === 87 || keyNum === 65 || keyNum === 83 || keyNum === 68)) {return;} // if not an arrow key, leave
+                    if ( !(keyNum >= 37 && keyNum <= 40) && !(keyNum === 87 || keyNum === 65 || keyNum === 83 || keyNum === 68 || keyNum === 104 || keyNum === 102 || keyNum === 101 || keyNum === 100)) {return;} // if not an arrow key, leave
                     
                     // This removes the listener added at the #listenerX line
                     SNAKE.removeEventListener(elmContainer, "keydown", myKeyListener, false);
